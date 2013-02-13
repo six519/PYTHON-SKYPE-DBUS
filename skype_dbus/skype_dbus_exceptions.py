@@ -1,0 +1,3 @@
+
+class SkypeDBusException(Exception):
+	pass
