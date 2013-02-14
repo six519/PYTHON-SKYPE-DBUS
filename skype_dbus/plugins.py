@@ -26,7 +26,7 @@ class SkypeAutoResponderPlugin(SkypeDBusEventsBase, SkypeDBusFunctionsBase):
 
 		if automatedMsg != "":
 			chatname = self.getChatName(skype_dbus, messageId)
-			print "Set to seen is: %s" % self.setToSeen(skype_dbus, messageId)
+			self.setToSeen(skype_dbus, messageId)
 
 			self.sendMessage(skype_dbus,chatname, automatedMsg)
 
