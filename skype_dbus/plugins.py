@@ -2,6 +2,9 @@ from bases import SkypeDBusEventsBase
 from messages import SkypeDBusFunctionsBase
 from settings import SKYPE_USER_STATUS_AWAY, SKYPE_USER_STATUS_DND
 import re, urllib2
+from python_simsimi import SimSimi
+from python_simsimi.language_codes import LC_FILIPINO
+from python_simsimi.simsimi import SimSimiException
 
 class SkypeAutoResponderPlugin(SkypeDBusEventsBase, SkypeDBusFunctionsBase):
 
@@ -47,3 +50,34 @@ class SkypeUrlToTiny(SkypeDBusEventsBase, SkypeDBusFunctionsBase):
 
 	def chat_message_sent(self, skype_dbus, **kwargs):
 		self.autoEdit(skype_dbus, **kwargs)
+
+
+
+class SkypeSimSimiPlugin(SkypeDBusEventsBase, SkypeDBusFunctionsBase):
+
+	def __init__(self, *args, **kwargs):
+		self.conversation_key = kwargs.get('conversation_key','')
+		self.conversation_language = kwargs.get('conversation_language',LC_FILIPINO)
+
+	def chat_message_received(self, skype_dbus, **kwargs):
+
+		messageId = kwargs.get('skype_message_id')
+		automatedMsg = "SimSimi can't talk to you right now.. :)"
+
+		body = self.getBody(skype_dbus, messageId)
+		body = body.strip()
+
+		simSimi = SimSimi(
+			conversation_language=self.conversation_language,
+			conversation_key=self.conversation_key
+		)
+
+		try:
+			response = simSimi.getConversation(body)
+			automatedMsg = response['response']
+		except SimSimiException as e:
+			pass
+
+		chatname = self.getChatName(skype_dbus, messageId)
+		self.setToSeen(skype_dbus, chatname)
+		self.sendMessage(skype_dbus,chatname, automatedMsg)
