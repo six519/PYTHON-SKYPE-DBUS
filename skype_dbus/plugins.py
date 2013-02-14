@@ -26,7 +26,7 @@ class SkypeAutoResponderPlugin(SkypeDBusEventsBase, SkypeDBusFunctionsBase):
 
 		if automatedMsg != "":
 			chatname = self.getChatName(skype_dbus, messageId)
-			self.setToSeen(skype_dbus, chatname)
+			print "Set to seen is: %s" % self.setToSeen(skype_dbus, messageId)
 
 			self.sendMessage(skype_dbus,chatname, automatedMsg)
 
@@ -79,5 +79,5 @@ class SkypeSimSimiPlugin(SkypeDBusEventsBase, SkypeDBusFunctionsBase):
 			pass
 
 		chatname = self.getChatName(skype_dbus, messageId)
-		self.setToSeen(skype_dbus, chatname)
+		self.setToSeen(skype_dbus, messageId)
 		self.sendMessage(skype_dbus,chatname, automatedMsg)

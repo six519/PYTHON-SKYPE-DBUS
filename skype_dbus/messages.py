@@ -230,9 +230,9 @@ class SkypeDBusFunctionsBase(object):
 		response = skype_dbus.send_message(msgObject.get().chat_message().otherParam(messageId).property_chatname().toStr())
 		return response.replace(msgObject.chat_message().otherParam(messageId).property_chatname().toStr(), "").strip()
 
-	def setToSeen(self, skype_dbus, chatname):
+	def setToSeen(self, skype_dbus, messageId):
 		msgObject = DBusChatMsg()
-		return skype_dbus.send_message(msgObject.set_().chat_message().otherParam(chatname).seen().toStr())
+		return skype_dbus.send_message(msgObject.set_().chat_message().otherParam(messageId).seen().toStr())
 
 	def editMessage(self, skype_dbus, messageId, newmsg):
 		msgObject = DBusChatMsg()
