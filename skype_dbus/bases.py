@@ -12,6 +12,14 @@ class SkypeDBusMessageBase(object):
 		self.message = "SET "
 		return self
 
+	def property_type(self):
+		self.message += "TYPE "
+		return self
+
+	def property_status(self):
+		self.message += "STATUS "
+		return self
+
 	def otherParam(self, param):
 		self.message += param + " "
 		return self
@@ -87,4 +95,10 @@ class SkypeDBusEventsBase(object):
 		pass
 
 	def chat_message_read(self, *args, **kwargs):
+		pass
+
+	def file_transfer_outgoing(self, *args, **kwargs):
+		pass
+
+	def file_transfer_incoming(self, *args, **kwargs):
 		pass

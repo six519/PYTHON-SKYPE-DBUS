@@ -152,6 +152,105 @@ class DBusUserStatMsg(SkypeDBusMessageBase):
 		self.message += "LOGGEDOUT "
 		return self
 
+class DBusFileTransferMsg(SkypeDBusMessageBase):
+
+	def __init__(self, *args, **kwargs):
+
+		super(DBusFileTransfersMsg, self).__init__(*args, **kwargs)
+
+	def file_transfer(self):
+		self.message += "FILETRANSFER "
+
+	def incoming(self):
+		self.message += "INCOMING "
+
+	def outgoing(self):
+		self.message += "OUTGOING "
+
+	def new(self):
+		self.message += "NEW "
+
+	def waiting_for_accept(self):
+		self.message += "WAITING_FOR_ACCEPT "
+
+	def connecting(self):
+		self.message += "CONNECTING "
+
+	def transferring(self):
+		self.message += "TRANSFERRING "
+
+	def transferring_over_relay(self):
+		self.message += "TRANSFERRING_OVER_RELAY "
+
+	def paused(self):
+		self.message += "PAUSED "
+
+	def remotely_paused(self):
+		self.message += "REMOTELY_PAUSED "
+
+	def cancelled(self):
+		self.message += "CANCELLED "
+
+	def completed(self):
+		self.message += "COMPLETED "
+
+	def failed(self):
+		self.message += "FAILED "
+
+	def failure_reason(self):
+		self.message += "FAILUREREASON "
+
+	def sender_not_authorized(self):
+		self.message += "SENDER_NOT_AUTHORIZED "
+
+	def remotely_cancelled(self):
+		self.message += "REMOTELY_CANCELLED "
+
+	def failed_read(self):
+		self.message += "FAILED_READ "
+
+	def failed_remoted_read(self):
+		self.message += "FAILED_REMOTE_READ "
+
+	def failed_write(self):
+		self.message += "FAILED_WRITE "
+
+	def failed_remote_write(self):
+		self.message += "FAILED_REMOTE_WRITE "
+
+	def remote_does_not_support_ft(self):
+		self.message += "REMOTE_DOES_NOT_SUPPORT_FT "
+
+	def remote_offline_for_too_long(self):
+		self.message += "REMOTE_OFFLINE_FOR_TOO_LONG "
+
+	def partner_handle(self):
+		self.message += "PARTNER_HANDLE "
+
+	def partner_dispname(self):
+		self.message += "PARTNER_DISPNAME "
+
+	def start_time(self):
+		self.message += "STARTTIME "
+
+	def finish_time(self):
+		self.message += "FINISHTIME "
+
+	def file_path(self):
+		self.message += "FILEPATH "
+
+	def file_name(self):
+		self.message += "FILENAME "
+
+	def file_size(self):
+		self.message += "FILESIZE "
+
+	def bytes_per_second(self):
+		self.message += "BYTESPERSECOND "
+
+	def bytes_transferred(self):
+		self.message += "BYTESTRANSFERRED "
+
 class DBusChatMsg(SkypeDBusMessageBase):
 
 	def __init__(self, *args, **kwargs):
@@ -178,10 +277,6 @@ class DBusChatMsg(SkypeDBusMessageBase):
 		self.message += "FROM_DISPNAME "
 		return self
 
-	def property_type(self):
-		self.message += "TYPE "
-		return self
-
 	def property_users(self):
 		self.message += "USERS "
 		return self
@@ -192,10 +287,6 @@ class DBusChatMsg(SkypeDBusMessageBase):
 
 	def property_body(self):
 		self.message += "BODY "
-		return self
-
-	def property_status(self):
-		self.message += "STATUS "
 		return self
 
 	def status_sending(self):
